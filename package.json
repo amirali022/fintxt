@@ -1,0 +1,25 @@
+{
+  "name": "stocktwits-scraper",
+  "version": "1.0.0",
+  "description": "Scrape Tweets from stocktwits.com",
+  "main": "index.js",
+  "scripts": {
+	"start:st": "npm run build && node dist/latest-trending.js",
+    "build": "tsc --build --verbose"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node16": "^16.1.1",
+    "@types/node": "^20.11.24",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "cheerio": "^1.0.0-rc.12",
+    "csv-writer": "^1.6.0"
+  }
+}
