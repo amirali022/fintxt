@@ -34,8 +34,10 @@ const getTweet = async ( max: number): Promise<any> => {
 
 	const data = res.data;
 
-	if( data.messages.length === 0)
+	if( data.messages.length === 0) {
+		console.info( "Job Finished!");
 		return;
+	}
 
 	const maxCursor = data?.cursor?.max;
 
@@ -64,7 +66,7 @@ const getTweet = async ( max: number): Promise<any> => {
 let max = parseInt( process.argv[ 2]);
 
 ( async () => {
-	console.info( "Starting Scraping...");
+	console.info( "Starting Job...");
 	if( !max) {
 		max = 0;
 	} else {

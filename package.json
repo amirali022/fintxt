@@ -4,7 +4,8 @@
   "description": "Scrape Tweets from stocktwits.com",
   "main": "index.js",
   "scripts": {
-	"start:st": "npm run build && node dist/latest-trending.js",
+	"start:st": "npm run build && node dist/stocktwits/latest-trending.js",
+	"start:ft": "npm run build && node dist/fortune",
     "build": "tsc --build --verbose"
   },
   "keywords": [],

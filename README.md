@@ -13,8 +13,11 @@
 		- Scrape based on symbol
 
 2. [Fortune](https://fortune.com/)
-	- [ ] /api/page/latest/all
-	- [ ] /api/page/section/tech
-	- [ ] /api/page/section/finance
-	- [ ] /api/page/section/leadership
-	- [ ] /api/page/section/well
+
+	*author is also available*
+
+	- [x] /api/page/latest/all/1
+	- [x] /api/page/section/tech/1
+	- [x] /api/page/section/finance/1
+	- [x] /api/page/section/leadership/1
+	- [x] /api/page/section/well/1
