@@ -6,6 +6,7 @@
   "scripts": {
 	"start:st": "npm run build && node dist/stocktwits/latest-trending.js",
 	"start:ft": "npm run build && node dist/fortune",
+	"start:fb": "npm run build && node dist/forbes",
     "build": "tsc --build --verbose"
   },
   "keywords": [],

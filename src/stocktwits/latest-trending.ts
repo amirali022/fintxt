@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createObjectCsvWriter} from "csv-writer";
+import { cleaner} from "../utils/textCleaner";
 
 const baseUrl = "https://api.stocktwits.com/api/2/streams/trending.json";
 
@@ -48,7 +49,7 @@ const getTweet = async ( max: number): Promise<any> => {
 			created_at: msg.created_at,
 			username: msg.user.username,
 			user_id: msg.user.id,
-			body: msg.body.replaceAll( ",", ""),
+			body: cleaner( msg.body),
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			symbols: msg.symbols.map( ( s: any) => s.symbol).join( "|"),
 			likes: msg.likes?.total || 0,

@@ -21,3 +21,6 @@
 	- [x] /api/page/section/finance/1
 	- [x] /api/page/section/leadership/1
 	- [x] /api/page/section/well/1
+
+3. [Forbes](https://forbes.com/)
+	- [x] money: https://www.forbes.com/simple-data/chansec/stream/?sourceValue=channel_72&streamSourceType=channelsection&start=1

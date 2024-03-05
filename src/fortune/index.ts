@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createObjectCsvWriter} from "csv-writer";
+import { cleaner} from "../utils/textCleaner";
 
 const type = parseInt( process.argv[ 2]);
 let page = parseInt( process.argv[ 3]);
@@ -66,10 +67,10 @@ const getHeadlines = async ( page: number): Promise<any> => {
 	const result = data.map( ( news: any) => {
 		return {
 			date: news.date,
-			section: news.eyebrowSectionLabel.replaceAll( ",", "."),
-			tag: news.eyebrowTagLabel.replaceAll( ",", "."),
-			excerpt: news.excerpt.replaceAll( ",", "."),
-			title: news.title.replaceAll( ",", "."),
+			section: cleaner( news.eyebrowSectionLabel),
+			tag: cleaner( news.eyebrowTagLabel),
+			excerpt: cleaner( news.excerpt),
+			title: cleaner( news.title),
 			link: news.titleLink
 		};
 	});
