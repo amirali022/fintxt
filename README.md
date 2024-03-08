@@ -24,3 +24,6 @@
 
 3. [Forbes](https://forbes.com/)
 	- [x] money: https://www.forbes.com/simple-data/chansec/stream/?sourceValue=channel_72&streamSourceType=channelsection&start=1
+
+4. [CNBC](https://www.cnbc.com/)
+	- [ ] https://www.cnbc.com/site-map/

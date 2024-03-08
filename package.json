@@ -4,9 +4,10 @@
   "description": "Scrape Tweets from stocktwits.com",
   "main": "index.js",
   "scripts": {
-	"start:st": "npm run build && node dist/stocktwits/latest-trending.js",
-	"start:ft": "npm run build && node dist/fortune",
-	"start:fb": "npm run build && node dist/forbes",
+    "start:st": "npm run build && node dist/stocktwits/latest-trending.js",
+    "start:ft": "npm run build && node dist/fortune",
+    "start:fb": "npm run build && node dist/forbes",
+    "start:cb": "npm run build && node dist/cnbc",
     "build": "tsc --build --verbose"
   },
   "keywords": [],
@@ -14,14 +15,17 @@
   "license": "ISC",
   "devDependencies": {
     "@tsconfig/node16": "^16.1.1",
+    "@types/async": "^3.2.24",
     "@types/node": "^20.11.24",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "eslint": "^8.57.0"
   },
   "dependencies": {
+    "async": "^3.2.5",
     "axios": "^1.6.7",
     "cheerio": "^1.0.0-rc.12",
+    "csv-reader": "^1.0.12",
     "csv-writer": "^1.6.0"
   }
 }
