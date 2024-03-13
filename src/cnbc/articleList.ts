@@ -8,7 +8,7 @@ import { eachSeries} from "async";
 import { cleaner} from "../utils/textCleaner";
 
 const csvWriter = createObjectCsvWriter( {
-	path: `data/cnbc/a-${ Date.now()}.csv`,
+	path: `data/cnbc/articles-${ Date.now()}.csv`,
 	header: [
 		{ id: "title", title: "title"},
 		{ id: "link", title: "link"}
@@ -38,9 +38,8 @@ const getArticleList = async ( day: Row) => {
 	csvWriter.writeRecords( links);
 };
 
-const main = async ( year: number, file: string) => {
+const main = async ( file: string) => {
 	console.info( "Starting Job : Scrape Articles ...");
-	console.info( `Year: ${ year}`);
 
 	const days: Row[] = [];
 
@@ -54,9 +53,9 @@ const main = async ( year: number, file: string) => {
 		})
 		.on( "end", async () => {
 			await eachSeries( days, getArticleList);
+			console.info( "Jon Finished!");
 		});
 
-	console.log( "Jon Finished!");
 };
 
 export default main;

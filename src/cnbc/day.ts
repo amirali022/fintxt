@@ -53,9 +53,9 @@ const main = async ( year: number, file: string) => {
 		.on( "end", async () => {
 			await eachSeries( months, getDayList);
 			csvWriter.writeRecords( days);
+			console.info( "Jon Finished!");
 		});
 
-	console.log( "Jon Finished!");
 };
 
 export default main;

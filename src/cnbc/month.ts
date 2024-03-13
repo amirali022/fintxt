@@ -38,7 +38,7 @@ const main = async ( year: number) => {
 
 	csvWriter.writeRecords( links);
 
-	console.log( "Jon Finished!");
+	console.info( "Jon Finished!");
 };
 
 export default main;
