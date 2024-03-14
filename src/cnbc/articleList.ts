@@ -7,13 +7,8 @@ import CsvReadableStream from "csv-reader";
 import { eachSeries} from "async";
 import { cleaner} from "../utils/textCleaner";
 
-const csvWriter = createObjectCsvWriter( {
-	path: `data/cnbc/articles-${ Date.now()}.csv`,
-	header: [
-		{ id: "title", title: "title"},
-		{ id: "link", title: "link"}
-	]
-});
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let csvWriter: any;
 
 const getArticleList = async ( day: Row) => {
 	console.info( `Scraping Articles of Date: ${ day.title}...`);
@@ -30,7 +25,7 @@ const getArticleList = async ( day: Row) => {
 
 		if( link?.indexOf( "advertorial") === -1) 
 			return {
-				title: cleaner( a.text()),
+				title: cleaner( a.text(), "."),
 				link
 			};
 	}).toArray();
@@ -38,12 +33,20 @@ const getArticleList = async ( day: Row) => {
 	csvWriter.writeRecords( links);
 };
 
-const main = async ( file: string) => {
-	console.info( "Starting Job : Scrape Articles ...");
+const main = async ( year: number, file: string) => {
+	console.info( `Starting Job : Scrape Article List of ${ year} ...`);
 
 	const days: Row[] = [];
 
 	const inputStream = createReadStream( `data/cnbc/${ file}`, "utf-8");
+
+	csvWriter = createObjectCsvWriter( {
+		path: `data/cnbc/articlesList-${ year}-${ Date.now()}.csv`,
+		header: [
+			{ id: "title", title: "title"},
+			{ id: "link", title: "link"}
+		]
+	});
 
 	inputStream
 		.pipe( new CsvReadableStream( { asObject: true}))

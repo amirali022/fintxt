@@ -7,21 +7,8 @@ import CsvReadableStream from "csv-reader";
 import { eachLimit} from "async";
 import { cleaner} from "../utils/textCleaner";
 
-const csvWriter = createObjectCsvWriter( {
-	path: `data/cnbc/detail-${ Date.now()}.csv`,
-	header: [
-		{ id: "nodeId", title: "nodeId"},
-		{ id: "publishedDate", title: "publishedDate"},
-		{ id: "assetType", title: "assetType"},
-		{ id: "articleHeader", title: "articleHeader"},
-		{ id: "title", title: "title"},
-		{ id: "description", title: "description"},
-		{ id: "keywords", title: "keywords"},
-		{ id: "tags", title: "tags"},
-		{ id: "keyPoints", title: "keyPoints"},
-	],
-	fieldDelimiter: ";"
-});
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let csvWriter: any;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getArticleDetail = async ( day: Row, tries: number): Promise<any> => {
@@ -73,12 +60,28 @@ const getArticleDetail = async ( day: Row, tries: number): Promise<any> => {
 
 const getArticle = async ( day: Row) => getArticleDetail( day, 0);
 
-const main = async ( file: string) => {
-	console.info( "Starting Job : Scrape Article Details ...");
+const main = async ( year: number, file: string) => {
+	console.info( `Starting Job : Scrape Article Detail of ${ year} ...`);
 
 	const articles: Row[] = [];
 
 	const inputStream = createReadStream( `data/cnbc/${ file}`, "utf-8");
+
+	csvWriter = createObjectCsvWriter( {
+		path: `data/cnbc/articleDetail-${ year}-${ Date.now()}.csv`,
+		header: [
+			{ id: "nodeId", title: "nodeId"},
+			{ id: "publishedDate", title: "publishedDate"},
+			{ id: "assetType", title: "assetType"},
+			{ id: "articleHeader", title: "articleHeader"},
+			{ id: "title", title: "title"},
+			{ id: "description", title: "description"},
+			{ id: "keywords", title: "keywords"},
+			{ id: "tags", title: "tags"},
+			{ id: "keyPoints", title: "keyPoints"},
+		],
+		fieldDelimiter: ";"
+	});
 
 	inputStream
 		.pipe( new CsvReadableStream( { asObject: true}))
@@ -87,7 +90,7 @@ const main = async ( file: string) => {
 			articles.push( row);
 		})
 		.on( "end", async () => {
-			await eachLimit( articles, 24, getArticle);
+			await eachLimit( articles, 10, getArticle);
 			console.info( "Jon Finished!");
 		});
 

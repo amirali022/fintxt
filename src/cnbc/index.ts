@@ -16,10 +16,10 @@ const input = process.argv[ 4];
 		await day( year, input);
 		break;
 	case 2:
-		await articleList( input);
+		await articleList( year, input);
 		break;
 	case 3:
-		await articleDetail( input);
+		await articleDetail( year, input);
 		break;
 	}
 })();

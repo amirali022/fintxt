@@ -23,11 +23,10 @@ const getMonthList = async ( year: number) => {
 };
 
 const main = async ( year: number) => {
-	console.info( "Starting Job : Scrape Month ...");
-	console.info( `Year: ${ year}`);
+	console.info( `Starting Job : Scrape Month of ${ year} ...`);
 	
 	const csvWriter = createObjectCsvWriter( {
-		path: `data/cnbc/${ year}-m-${ Date.now()}.csv`,
+		path: `data/cnbc/monthList-${ year}-${ Date.now()}.csv`,
 		header: [
 			{ id: "title", title: "title"},
 			{ id: "link", title: "link"}

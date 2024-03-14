@@ -33,7 +33,7 @@ const main = async ( year: number, file: string) => {
 	console.info( `Year: ${ year}`);
 	
 	const csvWriter = createObjectCsvWriter( {
-		path: `data/cnbc/y${ year}-d-${ Date.now()}.csv`,
+		path: `data/cnbc/daysList-${ year}-${ Date.now()}.csv`,
 		header: [
 			{ id: "title", title: "title"},
 			{ id: "link", title: "link"}
