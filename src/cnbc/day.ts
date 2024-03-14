@@ -45,7 +45,11 @@ const main = async ( year: number, file: string) => {
 	const inputStream = createReadStream( `data/cnbc/${ file}`, "utf-8");
 
 	inputStream
-		.pipe( new CsvReadableStream( { asObject: true}))
+		.pipe( new CsvReadableStream( {
+			asObject: true,
+			trim: true,
+			skipEmptyLines: true
+		}))
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		.on( "data", ( row: any) => {
 			months.push( row);

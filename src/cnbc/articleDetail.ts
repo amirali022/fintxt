@@ -12,6 +12,8 @@ let csvWriter: any;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getArticleDetail = async ( day: Row, tries: number): Promise<any> => {
+	if( !day.link) return;
+	
 	const link = day.link.substring( 20);
 	console.info( "Scraping Article:", link.length > 60 ? `${ link.substring( 0, 60)}...` : link);
 	
@@ -84,13 +86,17 @@ const main = async ( year: number, file: string) => {
 	});
 
 	inputStream
-		.pipe( new CsvReadableStream( { asObject: true}))
+		.pipe( new CsvReadableStream( {
+			asObject: true,
+			trim: true,
+			skipEmptyLines: true
+		}))
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		.on( "data", ( row: any) => {
 			articles.push( row);
 		})
 		.on( "end", async () => {
-			await eachLimit( articles, 10, getArticle);
+			await eachLimit( articles, 24, getArticle);
 			console.info( "Jon Finished!");
 		});
 

@@ -49,7 +49,11 @@ const main = async ( year: number, file: string) => {
 	});
 
 	inputStream
-		.pipe( new CsvReadableStream( { asObject: true}))
+		.pipe( new CsvReadableStream( {
+			asObject: true,
+			trim: true,
+			skipEmptyLines: true
+		}))
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		.on( "data", ( row: any) => {
 			days.push( row);
