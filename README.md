@@ -27,3 +27,4 @@
 
 4. [CNBC](https://www.cnbc.com/)
 	- [x] https://www.cnbc.com/site-map/
+	- [x] Article Detail [ nodeId, publishedDate, assetType, articleHeader, title, description, keywords, tags, keyPoints]
