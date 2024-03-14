@@ -30,7 +30,8 @@ const csvWriter = createObjectCsvWriter( {
 		{ id: "date", title: "date"},
 		{ id: "title", title: "title"},
 		{ id: "description", title: "description"}
-	]
+	],
+	fieldDelimiter: ";"
 });
 
 const baseUrl = ( start: number) => `https://www.forbes.com/simple-data/chansec/stream/?sourceValue=channel_${ channel}&streamSourceType=channelsection&start=${ start}`;

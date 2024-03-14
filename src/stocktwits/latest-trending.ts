@@ -16,7 +16,8 @@ const csvWriter = createObjectCsvWriter( {
 		{ id: "likes", title: "likes"},
 		{ id: "reshares", title: "reshares"},
 		{ id: "sentiment", title: "sentiment"}
-	]
+	],
+	fieldDelimiter: ";"
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

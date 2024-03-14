@@ -36,7 +36,8 @@ const csvWriter = createObjectCsvWriter( {
 		{ id: "excerpt", title: "excerpt"},
 		{ id: "title", title: "title"},
 		{ id: "link", title: "link"}
-	]
+	],
+	fieldDelimiter: ";"
 });
 
 const baseUrl = `https://fortune.com/api/page/${ path}`;
