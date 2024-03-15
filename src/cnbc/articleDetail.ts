@@ -96,7 +96,7 @@ const main = async ( year: number, file: string) => {
 			articles.push( row);
 		})
 		.on( "end", async () => {
-			await eachLimit( articles, 24, getArticle);
+			await eachLimit( articles, 32, getArticle);
 			console.info( "Jon Finished!");
 		});
 
