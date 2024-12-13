@@ -1,7 +1,7 @@
 import type { Row} from "../utils/interface";
 import { createReadStream} from "fs";
 import axios from "axios";
-import { Element, load} from "cheerio";
+import { load} from "cheerio";
 import { createObjectCsvWriter} from "csv-writer";
 import CsvReadableStream from "csv-reader";
 import { eachSeries} from "async";
@@ -11,26 +11,36 @@ import { cleaner} from "../utils/textCleaner";
 let csvWriter: any;
 
 const getArticleList = async ( day: Row) => {
-	console.info( `Scraping Articles of Date: ${ day.title}...`);
+	console.info( `Scraping Articles of ${ day.title}...`);
 	
 	const res = await axios.get( day.link);
 
 	const $ = load( res.data);
 
-	const linkElements = $( ".SiteMapArticleList-articleData > ul > li > a");
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const script = ( $( "script").get()[ 1].children[ 0] as any).data as string;
 
-	const links = linkElements.map( ( i: number, el: Element) => {
-		const a = $( el);
-		const link = a.attr()?.[ "href"];
+	const start = script.indexOf( "window.__c_data") + "window.__c_data".length + 1;
+	const end = script.indexOf( "window.styles") - 2;
+	const ROOT_QUERY = JSON.parse( script.slice( start, end)).ROOT_QUERY;
 
-		if( link?.indexOf( "advertorial") === -1) 
-			return {
-				title: cleaner( a.text(), "."),
-				link
-			};
-	}).toArray();
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const links = ROOT_QUERY[ Object.keys( ROOT_QUERY)[ 1]].results as any[];
 
-	csvWriter.writeRecords( links);
+	const result: { title: string; link: string;}[] = [];
+
+	links.forEach( l => {
+		if( l.url?.indexOf( "advertorial") === -1 && l.title) {
+			result.push( {
+				title: cleaner( l.title, "."),
+				link: l.url
+			});
+		}
+	});
+
+	console.info( `\tscraped ${ result.length} articles`);
+
+	csvWriter.writeRecords( result);
 };
 
 const main = async ( year: number, file: string) => {

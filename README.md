@@ -28,3 +28,13 @@
 4. [CNBC](https://www.cnbc.com/)
 	- [x] https://www.cnbc.com/site-map/
 	- [x] Article Detail [ nodeId, publishedDate, assetType, articleHeader, title, description, keywords, tags, keyPoints]
+
+5. [Bloomberg](https://bloomberg.com/)
+6. [Reuters](https://reuters.com/)
+7. [Yahoo Finance](https://finance.yahoo.com/)
+8. [MarketWatch](https://marketwatch.com/)
+9. [Wall Street Journal](https://wsj.com/)
+10. [Financial Times](https://ft.com)
+11. [NewsAPI](https://newsapi.org/)
+12. [Alpha Vantage](https://alphavantage.co/)
+13. [FinnHub](https://finnhub.io/)
